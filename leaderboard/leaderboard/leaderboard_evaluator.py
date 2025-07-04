@@ -200,7 +200,12 @@ class LeaderboardEvaluator(object):
         """
         self.carla_path = os.environ["CARLA_ROOT"]
         args.port = find_free_port(args.port)
-        cmd1 = f"{os.path.join(self.carla_path, 'CarlaUE4.sh')} -RenderOffScreen -nosound -carla-rpc-port={args.port} -graphicsadapter={args.gpu_rank}"
+        
+        # Check if GUI should be enabled
+        enable_gui = os.environ.get('CARLA_ENABLE_GUI', '0') == '1'
+        render_flag = '' if enable_gui else '-RenderOffScreen'
+        
+        cmd1 = f"{os.path.join(self.carla_path, 'CarlaUE4.sh')} {render_flag} -nosound -carla-rpc-port={args.port} -graphicsadapter={args.gpu_rank}"
         self.server = subprocess.Popen(cmd1, shell=True, preexec_fn=os.setsid)
         print(cmd1, self.server.returncode, flush=True)
         atexit.register(os.killpg, self.server.pid, signal.SIGKILL)
