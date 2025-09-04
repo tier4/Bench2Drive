@@ -239,12 +239,12 @@ Expected output:
 For testing with a single route or debugging:
 
 ```bash
-# Using the custom evaluation script with proper CARLA hostname
-bash run_diffusiondrive_eval.sh
+# Using the evaluation script
+bash run_evaluation_diffusiondrive.sh
 
 # Or disable GPU to avoid segfault (temporary workaround)
 export CUDA_VISIBLE_DEVICES=""
-bash run_diffusiondrive_eval.sh
+bash run_evaluation_diffusiondrive.sh
 ```
 
 **Note**: Currently experiencing segfault issues, likely GPU-related.
@@ -379,7 +379,6 @@ test_files/diffusiondrive_config.yaml+test_files/test_b2d.ckpt+eval_run
 
 - **Segmentation fault during evaluation**: GPU initialization conflict with PyTorch/CARLA
 - **Workaround**: Try running with `export CUDA_VISIBLE_DEVICES=""`
-- See `diffusiondrive_integration_status_2025-08-27.md` for details
 
 ### Model Loading Issues
 
