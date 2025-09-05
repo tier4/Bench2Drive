@@ -9,7 +9,6 @@ export PYTHONPATH=$PYTHONPATH:${CARLA_ROOT}/PythonAPI/carla
 export PYTHONPATH=$PYTHONPATH:leaderboard
 export PYTHONPATH=$PYTHONPATH:leaderboard/team_code
 export PYTHONPATH=$PYTHONPATH:scenario_runner
-export PYTHONPATH=$PYTHONPATH:/workspace/DiffusionDrive
 
 export SCENARIO_RUNNER_ROOT=scenario_runner
 export LEADERBOARD_ROOT=leaderboard
@@ -71,18 +70,18 @@ echo "========================================="
 
 # Run evaluation
 CUDA_VISIBLE_DEVICES=${GPU_RANK} python3 ${LEADERBOARD_ROOT}/leaderboard/leaderboard_evaluator.py \
-    --routes=${ROUTES} \
-    --repetitions=${REPETITIONS} \
-    --track=${CHALLENGE_TRACK_CODENAME} \
-    --checkpoint=${CHECKPOINT_ENDPOINT} \
-    --agent=${TEAM_AGENT} \
-    --agent-config=${TEAM_CONFIG} \
-    --debug=${DEBUG_CHALLENGE} \
-    --resume=${RESUME} \
-    --host=carla \
-    --port=${PORT} \
-    --traffic-manager-port=${TM_PORT} \
-    --gpu-rank=${GPU_RANK} 2>&1 | tee ${SAVE_PATH}/evaluation.log
+	--routes=${ROUTES} \
+	--repetitions=${REPETITIONS} \
+	--track=${CHALLENGE_TRACK_CODENAME} \
+	--checkpoint=${CHECKPOINT_ENDPOINT} \
+	--agent=${TEAM_AGENT} \
+	--agent-config=${TEAM_CONFIG} \
+	--debug=${DEBUG_CHALLENGE} \
+	--resume=${RESUME} \
+	--host=carla \
+	--port=${PORT} \
+	--traffic-manager-port=${TM_PORT} \
+	--gpu-rank=${GPU_RANK} 2>&1 | tee ${SAVE_PATH}/evaluation.log
 
 echo "========================================="
 echo "Evaluation completed!"
